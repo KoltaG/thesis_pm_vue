@@ -6,9 +6,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useAuth } from './composables/useAuth'; 
-import useNetwork from './composables/useNetwork';
+import { ref, onMounted } from "vue";
+import { useAuth } from "./composables/useAuth";
+import useNetwork from "./composables/useNetwork";
+import { useAuthWatcher } from "./composables/useAuthWatcher";
 
 // Call the network hook
 useNetwork();
@@ -27,5 +28,7 @@ onMounted(() => {
     isLoading.value = false;
   });
 });
-</script>
 
+// Watcher for auth state, to redirect to login if not authenticated, or to dashboard if authenticated
+useAuthWatcher();
+</script>

@@ -32,7 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
 import { useAuth } from "../composables/useAuth";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
@@ -55,13 +54,11 @@ const { value: passwordValue, errorMessage: passwordError } =
   useField<string>("password");
 
 const { tryLogin } = useAuth();
-const router = useRouter();
 
 const onSubmit = handleSubmit(async (values) => {
   try {
     await tryLogin(values.email, values.password);
     toast.success("Login successful!");
-    router.push("/");
   } catch (error) {
     toast.error("Error logging in, please try again!");
     console.error(error);
