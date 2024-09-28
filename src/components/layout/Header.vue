@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+// import { defineProps, defineEmits } from 'vue';
 
 // TODO: This is realy react like, how to do it in vue?
 

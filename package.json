@@ -18,6 +18,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/node": "^22.7.4",
+    "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",
