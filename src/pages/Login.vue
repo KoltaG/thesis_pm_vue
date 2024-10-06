@@ -5,14 +5,14 @@
 
       <form @submit.prevent="onSubmit">
         <CustomInput
-          v-model:modelValue="emailValue"
+          v-model="emailValue"
           label="Email"
           placeholder="Enter your email"
           :error="emailError"
         />
 
         <CustomInput
-          v-model:modelValue="passwordValue"
+          v-model="passwordValue"
           type="password"
           label="Password"
           placeholder="Enter your password"
