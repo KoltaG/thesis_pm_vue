@@ -1,7 +1,7 @@
 <template>
   <svg
-    class="currentColor" 
-    viewBox="0 0 22 15" 
+    class="currentColor"
+    viewBox="0 0 22 15"
     fill="none"
     :class="class"
   >
@@ -13,9 +13,7 @@
 </template>
 
 <script setup lang="ts">
-
-//TODO Why props never read?
-const props = defineProps<{
+defineProps<{
   class?: string;
 }>();
 </script>
