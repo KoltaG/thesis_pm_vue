@@ -1,12 +1,7 @@
 import { reactive, computed } from "vue";
 import authService from "../utils/services/authService";
 import { tokenExpired } from "../utils/tokenTools";
-
-interface User {
-  id: string;
-  name: string;
-  role: string;
-}
+import { User } from "../DTOs/login.response";
 
 interface AuthState {
   isLoggedIn: boolean;

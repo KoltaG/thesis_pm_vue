@@ -4,6 +4,7 @@ import Modal from "../components/common/Modal.vue";
 import NewProjectForm from "../components/project/NewProjectForm.vue";
 import { useAuth } from "../composables/useAuth";
 import PageHeader from "../components/layout/PageHeader.vue";
+import ProjectLists from "../components/dashboard/ProjectLists.vue";
 
 const { authState } = useAuth();
 
@@ -25,6 +26,7 @@ const openModal = () => {
     />
 
     <h2 class="text-2xl font-bold mb-4">Projects</h2>
+    <ProjectLists />
 
     <Modal
       :isOpen="isCreateProjectOpen"

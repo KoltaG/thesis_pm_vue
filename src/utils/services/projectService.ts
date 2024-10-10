@@ -1,8 +1,4 @@
-import {
-  Project,
-  Task,
-  TaskStatus,
-} from "../../context/projectContext/ProjectContext";
+import { Project, Task, TaskStatus } from "../../composables/useProject";
 import { TaskRequest } from "../../DTOs/task.request";
 import network from "../network";
 
