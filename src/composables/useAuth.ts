@@ -66,7 +66,7 @@ const checkAuthStatus = async (onAutoLoginReady?: () => void) => {
 };
 
 // Composable function to return the auth state and methods
-export const useAuth = () => {
+const useAuthComposable = () => {
   return {
     authState: computed(() => authState),
     tryLogin,
@@ -74,3 +74,6 @@ export const useAuth = () => {
     checkAuthStatus,
   };
 };
+
+const authInstance = useAuthComposable();
+export const useAuth = () => authInstance;

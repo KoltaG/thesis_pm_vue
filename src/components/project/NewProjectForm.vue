@@ -3,9 +3,12 @@ import { useField, useForm } from "vee-validate";
 import * as Yup from "yup";
 import Button from "../common/Button.vue";
 import CustomInput from "../common/CustomInput.vue";
+import { useProject } from "../../composables/useProject";
 
 // Define emits, these are can be catched by an event listener
 const emit = defineEmits(["success"]);
+
+const { createProject } = useProject();
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Project name is required!"),
@@ -18,9 +21,7 @@ const { handleSubmit, resetForm, isSubmitting } = useForm({
 const { value: name, errorMessage: nameError } = useField<string>("name");
 
 const handleCreateProject = handleSubmit(async (values) => {
-  // await createProject(values.name);
-  console.log("Project created:", values.name);
-
+  await createProject(values.name);
   emit("success");
   resetForm();
 });

@@ -42,7 +42,7 @@ interface UseProject {
   deleteTask: (taskId: string) => Promise<void>;
   updateTaskStatus: (taskId: string, status: TaskStatus) => Promise<void>;
 }
-export const useProject = (): UseProject => {
+const useProjectComposable = (): UseProject => {
   const state = reactive<ProjectState>({
     projects: [],
   });
@@ -62,8 +62,14 @@ export const useProject = (): UseProject => {
   const createProject = async (name: string): Promise<void> => {
     try {
       const response = await projectService.addProject(name);
-      state.projects.push(response);
-      toast.success("Project created successfully!");
+
+      if (response && response._id) {
+        state.projects.push(response);
+        console.log(state.projects, "Updated project state");
+        toast.success("Project created successfully!");
+      } else {
+        toast.error("Invalid project data returned from the server.");
+      }
     } catch (error) {
       toast.error("Error creating project.");
     }
@@ -172,14 +178,6 @@ export const useProject = (): UseProject => {
     return;
   };
 
-  // TODO: Doesnt really need to be here, we can just call fetchProjects from the component
-  //   // Fetch projects on mount if the user is logged in
-  //   onMounted(() => {
-  //     if (authState.value.isLoggedIn) {
-  //       fetchProjects();
-  //     }
-  //   });
-
   // Return the state and functions
   return {
     state,
@@ -193,3 +191,8 @@ export const useProject = (): UseProject => {
     unassignUserFromProject,
   };
 };
+
+// Create a new instance of the project composable, this is what will be used in the components
+// It's a singleton, so it will be the same instance across all components
+const projectInstance = useProjectComposable();
+export const useProject = () => projectInstance;
