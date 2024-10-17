@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, PropType, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-//import ConfirmModal from "../components/common/ConfirmModal.vue";
 import { useAuth } from "../../composables/useAuth";
 import Button from "../common/Button.vue";
 import ArrowUpIcon from "../icons/ArrowUpIcon.vue";
+import ConfirmModal from "../common/ConfirmModal.vue";
 
 defineProps({
   title: String,
-  onAddClick: Function,
+  onAddClick: {
+    type: Function as PropType<() => void>,
+  },
   addText: String,
-  onDeleteClick: Function,
+  onDeleteClick: {
+    type: Function as PropType<() => void>,
+  },
   deleteText: {
     type: String,
     default: "Delete",
   },
-  extraActions: null,
+  extraActions: {
+    type: null,
+  },
 });
 
 const { authState } = useAuth();
@@ -64,13 +70,13 @@ const navigateBack = () => {
       </div>
     </div>
 
-    <!-- <ConfirmModal
+    <ConfirmModal
       v-if="onDeleteClick"
       :isOpen="isConfirmDeleteOpen"
       @close="isConfirmDeleteOpen = false"
       title="Delete Project"
       @confirm="onDeleteClick"
       message="Are you sure you want to delete this project?"
-    /> -->
+    />
   </header>
 </template>

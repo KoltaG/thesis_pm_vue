@@ -39,20 +39,22 @@ onUnmounted(() => {
     ></div>
 
     <div
-      class="bg-white relative rounded-lg shadow-lg p-6 w-full max-w-lg z-10"
+      class="bg-white relative rounded-lg shadow-lg p-6 w-full max-w-lg z-10 flex max-h-[90vh] overflow-hidden"
     >
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold text-black">{{ title }}</h3>
+      <div class="flex-1 overflow-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-black">{{ title }}</h3>
 
-        <Button
-          @click="closeModal"
-          variant="text"
-          class="text-2xl absolute top-4 right-4"
-        >
-          &times;
-        </Button>
+          <Button
+            @click="closeModal"
+            variant="text"
+            class="text-2xl absolute top-4 right-4"
+          >
+            &times;
+          </Button>
+        </div>
+        <slot />
       </div>
-      <slot />
     </div>
   </div>
 </template>

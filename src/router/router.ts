@@ -9,6 +9,8 @@ import Login from "../pages/Login.vue";
 import Layout from "../components/layout/Layout.vue";
 import { useAuth } from "../composables/useAuth";
 import Dashboard from "../pages/Dashboard.vue";
+import ProjectDetails from "../pages/ProjectDetails.vue";
+import UserManagement from "../pages/UserManagement.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,6 +24,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "",
         component: Dashboard,
+      },
+      {
+        path: "/project/:id",
+        component: ProjectDetails,
+      },
+      {
+        path: "/user-management",
+        component: UserManagement,
       },
     ],
   },
