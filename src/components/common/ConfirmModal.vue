@@ -4,35 +4,36 @@ import Modal from "./Modal.vue";
 import Button from "./Button.vue";
 
 const props = defineProps<{
-  isOpen: boolean;
+  modelValue: boolean; // Bound with v-model
   title?: string;
   message: string;
   onConfirm: () => void;
 }>();
 
 const emit = defineEmits<{
-  (e: "update:isOpen", isOpen: boolean): void;
+  (e: "update:modelValue", value: boolean): void;
 }>();
 
-// TODO closing doesnt work, fix it (useing id insted of is open)
 const handleConfirm = () => {
   props.onConfirm();
-  emit("update:isOpen", false);
+  emit("update:modelValue", false);
+};
+
+const closeModal = () => {
+  emit("update:modelValue", false);
 };
 </script>
 
 <template>
   <Modal
-    :isOpen="props.isOpen"
-    @update:isOpen="emit('update:isOpen', $event)"
+    :isOpen="props.modelValue"
+    @close="closeModal"
     :title="props.title ?? 'Confirm Action'"
-    @close="emit('update:isOpen', false)"
   >
     <p class="mb-6 text-gray-700">{{ props.message }}</p>
     <div class="flex justify-end gap-4">
-      <!-- TODO: check why this button doesnt work -->
       <Button
-        @click="emit('update:isOpen', false)"
+        @click="closeModal"
         variant="text"
         type="button"
       >

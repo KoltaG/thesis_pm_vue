@@ -71,12 +71,12 @@ const navigateBack = () => {
     </div>
 
     <ConfirmModal
-      v-if="onDeleteClick"
-      :isOpen="isConfirmDeleteOpen"
-      @close="isConfirmDeleteOpen = false"
+      v-if="onDeleteClick && currentUser?.role !== 'Dev'"
+      v-model="isConfirmDeleteOpen"
       title="Delete Project"
       @confirm="onDeleteClick"
       message="Are you sure you want to delete this project?"
+      @close="isConfirmDeleteOpen = false"
     />
   </header>
 </template>

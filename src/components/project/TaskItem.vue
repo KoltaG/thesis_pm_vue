@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Button from "../common/Button.vue";
 import ConfirmModal from "../common/ConfirmModal.vue";
 import { Task, TaskStatus, useProject } from "../../composables/useProject";
 import TrashcanIcon from "../icons/TrashcanIcon.vue";
 import StatusButton from "./StatusButton.vue";
 
-defineProps<{
+const props = defineProps<{
   task: Task;
 }>();
 
 const { deleteTask, updateTaskStatus } = useProject();
-const confirmDeleteId = ref<string | null>(null);
+const confirmDeleteId = ref<string>("");
+
+const isConfirmDeleteOpen = computed(
+  () => confirmDeleteId.value === props.task._id
+);
 
 const handleUpdateTaskStatus = (taskId: string, status: TaskStatus) => {
   updateTaskStatus(taskId, status);
@@ -84,11 +88,11 @@ const getStatusColor = (status: TaskStatus) => {
     </div>
 
     <ConfirmModal
-      :isOpen="confirmDeleteId === task._id"
-      @setIsOpen="confirmDeleteId = $event ? task._id : null"
+      v-model="isConfirmDeleteOpen"
       title="Delete Task"
       @confirm="handleDeleteTask(task._id)"
       message="Are you sure you want to delete this task?"
+      @close="confirmDeleteId = ''"
     />
   </li>
 </template>
