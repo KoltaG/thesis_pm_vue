@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
 import TaskItem from "./TaskItem.vue";
 import { Task, TaskStatus } from "../../composables/useProject";
 

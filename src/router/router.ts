@@ -46,7 +46,7 @@ const router = createRouter({
 router.beforeEach(
   (
     to: RouteLocationNormalized,
-    from: RouteLocationNormalized,
+    _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
     const { authState } = useAuth();
