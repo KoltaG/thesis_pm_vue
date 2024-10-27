@@ -1,20 +1,14 @@
 <script setup lang="ts">
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, onMounted } from "vue";
 import { useProject } from "../../composables/useProject";
 import { format } from "date-fns";
 
 const { state, fetchProjects } = useProject();
 
-// Fetch projects on component mount
 onMounted(async () => {
   await fetchProjects();
 });
 
-watchEffect(() => {
-  console.log(state.projects, "watchEffect"); // Check if the state is updating here
-});
-
-// Computed property to get sorted projects
 const sortedProjects = computed(() => {
   return state.projects
     .slice()
@@ -24,7 +18,6 @@ const sortedProjects = computed(() => {
     );
 });
 
-// Format date function
 const formatDate = (dateString: string) => {
   return dateString ? format(new Date(dateString), "PP") : "N/A";
 };
