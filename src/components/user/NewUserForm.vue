@@ -4,14 +4,13 @@ import * as Yup from "yup";
 import Button from "../common/Button.vue";
 import CustomInput from "../common/CustomInput.vue";
 import { useUser } from "../../composables/useUser";
-import authService from "../../utils/services/authService";
 import { Role } from "../../DTOs/login.response";
 
 const props = defineProps<{
   onSuccess: () => void;
 }>();
 
-const { fetchUsers } = useUser();
+const { addUser } = useUser();
 
 const initialValues = {
   name: "",
@@ -33,15 +32,12 @@ const { handleSubmit, isSubmitting } = useForm({
   validationSchema,
 });
 
-//TODO instead of fetching, I should put this into the composable,m and push the response into the state
 const handleRegisterUser = handleSubmit(async (values) => {
-  console.log("Registering user:", values);
   try {
-    await authService.postRegister(values);
-    fetchUsers(); // Fetch users after adding a new user TODO: doesnt refreshes the list
+    await addUser(values);
     props.onSuccess();
   } catch (error) {
-    console.error("Failed to register user:", error);
+    console.error(error);
   }
 });
 

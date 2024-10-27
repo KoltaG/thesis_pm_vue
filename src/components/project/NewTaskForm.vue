@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useField, useForm } from "vee-validate";
 import * as Yup from "yup";
 import Button from "../common/Button.vue";
@@ -13,13 +13,13 @@ const props = defineProps<{
 }>();
 
 const { createTask, state: projectState } = useProject();
-const { state: userState } = useUser();
+const { state: userState, fetchUsers } = useUser();
 
 const project = computed(() =>
   projectState.projects.find((project) => project._id === props.projectId)
 );
 const assignedUsers = computed(() =>
-  userState.value.users.filter((user) =>
+  userState.users.filter((user) =>
     project.value?.assignedUserIds.includes(user._id)
   )
 );
@@ -59,6 +59,10 @@ const handleCreateTask = handleSubmit(async (values) => {
   } catch (error) {
     console.error("Failed to create task:", error);
   }
+});
+
+onMounted(() => {
+  fetchUsers();
 });
 </script>
 

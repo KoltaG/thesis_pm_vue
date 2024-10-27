@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watchEffect } from "vue";
+import { onMounted } from "vue";
 import { useUser } from "../../composables/useUser";
 import UserListItem from "./UserListItem.vue";
 
@@ -7,10 +7,6 @@ const { state: userState, fetchUsers } = useUser();
 
 onMounted(() => {
   fetchUsers();
-});
-
-watchEffect(() => {
-  console.log(userState.value.users, "watchEffect"); // Check if the state is updating here
 });
 </script>
 

@@ -1,22 +1,28 @@
-import { reactive, computed, onMounted } from "vue";
-import { toast } from "vue3-toastify"; // Import toast for notifications
+import { reactive } from "vue";
+import { toast } from "vue3-toastify";
 import { User } from "../DTOs/login.response";
 import userService from "../utils/services/userService";
-import { useAuth } from "./useAuth";
+import authService from "../utils/services/authService";
+import { RegisterRequest } from "../DTOs/register.request";
 
 export interface UserState {
   users: User[];
 }
 
-export const useUser = () => {
+interface UseUser {
+  state: UserState;
+  fetchUsers: () => Promise<void>;
+  addUser: (user: RegisterRequest) => Promise<void>;
+  deleteUser: (id: string) => Promise<void>;
+}
+
+const useUserComposable = (): UseUser => {
   const state = reactive<UserState>({
     users: [],
   });
 
-  const { authState } = useAuth();
-
   // Fetch users from API
-  const fetchUsers = async () => {
+  const fetchUsers = async (): Promise<void> => {
     try {
       const users = await userService.fetchUsers();
       state.users = users;
@@ -26,11 +32,23 @@ export const useUser = () => {
     }
   };
 
-  // Delete a user
-  const deleteUser = async (_id: string) => {
+  // Add a new user
+  const addUser = async (user: RegisterRequest): Promise<void> => {
     try {
-      await userService.deleteUser(_id);
-      state.users = state.users.filter((user) => user._id !== _id);
+      const newUser = await authService.postRegister(user);
+      state.users.push(newUser);
+      toast.success("User added successfully!");
+    } catch (error) {
+      console.error("Failed to add user:", error);
+      toast.error("Error adding user.");
+    }
+  };
+
+  // Delete a user
+  const deleteUser = async (id: string): Promise<void> => {
+    try {
+      await userService.deleteUser(id);
+      state.users = state.users.filter((user) => user._id !== id);
       toast.success("User deleted successfully!");
     } catch (error) {
       console.error("Failed to delete user:", error);
@@ -38,16 +56,14 @@ export const useUser = () => {
     }
   };
 
-  // Fetch users on mount if the user is logged in
-  onMounted(() => {
-    if (authState.value.isLoggedIn && authState.value.user?.role === "PM") {
-      fetchUsers();
-    }
-  });
-
   return {
-    state: computed(() => state),
+    state,
     fetchUsers,
+    addUser,
     deleteUser,
   };
 };
+
+// Singleton instance of the user composable
+const userInstance = useUserComposable();
+export const useUser = () => userInstance;

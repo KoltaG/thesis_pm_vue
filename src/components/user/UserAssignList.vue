@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import UserAssignListItem from "./UserAssignListItem.vue";
 import { useProject } from "../../composables/useProject";
 import { useUser } from "../../composables/useUser";
@@ -13,20 +13,20 @@ const {
   assignUserToProject,
   unassignUserFromProject,
 } = useProject();
-const { state: userState } = useUser();
+const { state: userState, fetchUsers } = useUser();
 
 const project = computed(() =>
   projectState.projects.find((p) => p._id === props.projectId)
 );
 
 const assignedUsers = computed(() =>
-  userState.value.users.filter((user) =>
+  userState.users.filter((user) =>
     project.value?.assignedUserIds.includes(user._id)
   )
 );
 
 const unassignedUsers = computed(() =>
-  userState.value.users.filter(
+  userState.users.filter(
     (user) => !project.value?.assignedUserIds.includes(user._id)
   )
 );
@@ -39,6 +39,10 @@ const handleAssignUser = (userId: string) => {
 const handleUnassignUser = (userId: string) => {
   unassignUserFromProject(props.projectId, userId);
 };
+
+onMounted(() => {
+  fetchUsers();
+});
 </script>
 
 <template>
