@@ -9,7 +9,7 @@ import ConfirmModal from "../common/ConfirmModal.vue";
 defineProps({
   title: String,
   onAddClick: {
-    type: Function as PropType<() => void>,
+    type: Function as PropType<() => void> | undefined,
   },
   addText: String,
   onDeleteClick: {

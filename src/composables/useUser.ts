@@ -28,7 +28,6 @@ const useUserComposable = (): UseUser => {
       state.users = users;
     } catch (error) {
       console.error("Failed to fetch users:", error);
-      toast.error("Error fetching users.");
     }
   };
 

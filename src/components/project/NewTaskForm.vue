@@ -61,8 +61,8 @@ const handleCreateTask = handleSubmit(async (values) => {
   }
 });
 
-onMounted(() => {
-  fetchUsers();
+onMounted(async () => {
+  await fetchUsers();
 });
 </script>
 

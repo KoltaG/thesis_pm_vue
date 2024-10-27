@@ -10,10 +10,8 @@ defineProps({
   error: String,
 });
 
-// Emits definition to trigger the update for v-model
 const emit = defineEmits(["update:modelValue"]);
 
-// Emit the updated value when the input changes
 const updateValue = (event: Event) => {
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 };

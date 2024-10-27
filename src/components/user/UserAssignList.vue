@@ -40,8 +40,8 @@ const handleUnassignUser = (userId: string) => {
   unassignUserFromProject(props.projectId, userId);
 };
 
-onMounted(() => {
-  fetchUsers();
+onMounted(async () => {
+  await fetchUsers();
 });
 </script>
 

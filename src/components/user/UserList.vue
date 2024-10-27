@@ -5,8 +5,8 @@ import UserListItem from "./UserListItem.vue";
 
 const { state: userState, fetchUsers } = useUser();
 
-onMounted(() => {
-  fetchUsers();
+onMounted(async () => {
+  await fetchUsers();
 });
 </script>
 

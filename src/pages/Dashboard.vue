@@ -5,6 +5,7 @@ import NewProjectForm from "../components/project/NewProjectForm.vue";
 import { useAuth } from "../composables/useAuth";
 import PageHeader from "../components/layout/PageHeader.vue";
 import ProjectLists from "../components/dashboard/ProjectLists.vue";
+import DashboardMetrics from "../components/dashboard/DashboardMetrics.vue";
 
 const { authState } = useAuth();
 
@@ -21,9 +22,14 @@ const openModal = () => {
   <div>
     <PageHeader
       title="Dashboard"
-      :onAddClick="openModal"
+      :onAddClick="authState.user?.role !== 'Dev' ? openModal : undefined"
       addText="Add New Project"
     />
+
+    <div v-if="authState.user?.role !== 'Dev'">
+      <h2 className="text-2xl font-bold mb-4">Metrics</h2>
+      <DashboardMetrics />
+    </div>
 
     <h2 class="text-2xl font-bold mb-4">Projects</h2>
     <ProjectLists />
