@@ -4,7 +4,7 @@ import Modal from "./Modal.vue";
 import Button from "./Button.vue";
 
 const props = defineProps<{
-  modelValue: boolean; // Bound with v-model
+  modelValue: boolean;
   title?: string;
   message: string;
   onConfirm: () => void;
@@ -32,13 +32,6 @@ const closeModal = () => {
   >
     <p class="mb-6 text-gray-700">{{ props.message }}</p>
     <div class="flex justify-end gap-4">
-      <Button
-        @click="closeModal"
-        variant="text"
-        type="button"
-      >
-        Cancel
-      </Button>
       <Button
         @click="handleConfirm"
         variant="info"
