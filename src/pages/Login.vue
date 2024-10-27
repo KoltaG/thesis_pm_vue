@@ -1,36 +1,3 @@
-<template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-50">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Login</h1>
-
-      <form @submit.prevent="onSubmit">
-        <CustomInput
-          v-model="emailValue"
-          label="Email"
-          placeholder="Enter your email"
-          :error="emailError"
-        />
-
-        <CustomInput
-          v-model="passwordValue"
-          type="password"
-          label="Password"
-          placeholder="Enter your password"
-          :error="passwordError"
-        />
-
-        <Button
-          type="submit"
-          :disabled="isSubmitting"
-          class="justify-center !text-center w-full p-3 bg-blue-500 text-white rounded-lg focus:ring-opacity-50 disabled:opacity-50"
-        >
-          Login
-        </Button>
-      </form>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useAuth } from "../composables/useAuth";
 import { useForm, useField } from "vee-validate";
@@ -65,3 +32,36 @@ const onSubmit = handleSubmit(async (values) => {
   }
 });
 </script>
+
+<template>
+  <div class="flex items-center justify-center min-h-screen bg-gray-50">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Login</h1>
+
+      <form @submit.prevent="onSubmit">
+        <CustomInput
+          v-model="emailValue"
+          label="Email"
+          placeholder="Enter your email"
+          :error="emailError"
+        />
+
+        <CustomInput
+          v-model="passwordValue"
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          :error="passwordError"
+        />
+
+        <Button
+          type="submit"
+          :disabled="isSubmitting"
+          class="justify-center !text-center w-full p-3 bg-blue-500 text-white rounded-lg focus:ring-opacity-50 disabled:opacity-50"
+        >
+          Login
+        </Button>
+      </form>
+    </div>
+  </div>
+</template>

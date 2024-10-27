@@ -1,10 +1,3 @@
-<template>
-  <router-view />
-  <div v-if="isLoading">
-    <p>Loading...</p>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAuth } from "./composables/useAuth";
@@ -32,3 +25,10 @@ onMounted(() => {
 // Watcher for auth state, to redirect to login if not authenticated, or to dashboard if authenticated
 useAuthWatcher();
 </script>
+
+<template>
+  <router-view />
+  <div v-if="isLoading">
+    <p>Loading...</p>
+  </div>
+</template>

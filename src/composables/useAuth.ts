@@ -15,7 +15,7 @@ const authState = reactive<AuthState>({
   user: undefined,
 });
 
-// Define the login function
+// Login function
 const tryLogin = async (email: string, password: string) => {
   const response = await authService.postLogin(email, password);
   const user = response.user;
@@ -23,13 +23,13 @@ const tryLogin = async (email: string, password: string) => {
   localStorage.setItem("access_token", response.token);
   localStorage.setItem("user", JSON.stringify(user));
 
-  // Update the state
+  // Update the global state
   authState.isLoggedIn = true;
   authState.user = user;
   authState.isLoading = false;
 };
 
-// Define the logout function
+// Logout function
 const logout = () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
@@ -75,5 +75,7 @@ const useAuthComposable = () => {
   };
 };
 
+// Create a new instance of the auth composable, this is what will be used in the components
+// It's a singleton, so it will be the same instance across all components
 const authInstance = useAuthComposable();
 export const useAuth = () => authInstance;

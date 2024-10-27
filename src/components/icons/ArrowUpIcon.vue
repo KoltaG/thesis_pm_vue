@@ -1,3 +1,9 @@
+<script setup lang="ts">
+defineProps<{
+  class?: string;
+}>();
+</script>
+
 <template>
   <svg
     fill="none"
@@ -12,9 +18,3 @@
     ></path>
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  class?: string;
-}>();
-</script>

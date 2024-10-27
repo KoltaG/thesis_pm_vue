@@ -1,3 +1,9 @@
+<script setup lang="ts">
+defineProps<{
+  class?: string;
+}>();
+</script>
+
 <template>
   <svg
     class="currentColor"
@@ -11,9 +17,3 @@
     />
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  class?: string;
-}>();
-</script>

@@ -43,15 +43,17 @@ const useNetwork = () => {
           // Handle API unavailable errors
           if (error.response.status > 500) {
             alert(
-              "Elnézést kérünk, de a szolgáltatás jelenleg nem elérhető. Kérjük próbálja meg később."
+              "Sorry, the service is currently unavailable. Please try again later."
             );
           }
         } else if (error.request) {
           alert(
-            "Elnézést kérünk, de a szolgáltatás jelenleg nem elérhető. Kérjük próbálja meg később."
+            "Sorry, the service is currently unavailable. Please try again later."
           );
         } else {
-          alert("Váratlan hiba történt. Kérjük próbálja meg később.");
+          alert(
+            "An error occurred while processing your request. Please try again later."
+          );
         }
 
         return Promise.reject(error);

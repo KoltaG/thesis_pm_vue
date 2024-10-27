@@ -1,3 +1,9 @@
+<script setup lang="ts">
+defineProps<{
+  class?: string;
+}>();
+</script>
+
 <template>
   <svg
     viewBox="0 0 448 512"
@@ -9,9 +15,3 @@
     />
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  class?: string;
-}>();
-</script>
