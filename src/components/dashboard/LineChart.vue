@@ -33,5 +33,6 @@ defineProps<{
     id="my-chart-id"
     :options="chartOptions"
     :data="chartData"
+    :style="{ maxHeight: '400px' }"
   />
 </template>
