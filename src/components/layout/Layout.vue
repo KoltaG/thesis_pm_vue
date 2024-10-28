@@ -3,10 +3,8 @@ import { ref } from "vue";
 import Header from "./Header.vue";
 import Navbar from "./Navbar.vue";
 
-// Define reactive state for isNavbarOpen
 const isNavbarOpen = ref(false);
 
-// Toggle navbar state
 const setIsNavbarOpen = (newState: boolean) => {
   isNavbarOpen.value = newState;
 };
